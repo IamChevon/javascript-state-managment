@@ -1,4 +1,4 @@
-import PubSub from '../lib/pubsub';
+import PubSub from '../lib/pubsub.js';
 
 export default class Store {
     constructor(params) {
@@ -49,7 +49,7 @@ export default class Store {
 
         self.status = 'action';
 
-        self.actions[ationKey](self, payload);
+        self.actions[actionKey](self, payload);
 
         console.groupEnd();
 
@@ -66,7 +66,7 @@ export default class Store {
 
         self.status = 'mutation';
 
-        let newState = self.mutations[mutationKey](self, payload);
+        let newState = self.mutations[mutationKey](self.state, payload);
 
         self.state = Object.assign(self.state, newState);
 
