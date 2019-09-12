@@ -19,6 +19,6 @@ export default class PuSub {
             return [];
         }
 
-        return self.events[events].map(callback => callback(data));
+        return self.events[event].map(callback => callback(data));
     }
 }
