@@ -36,4 +36,40 @@ export default class Store {
             }
         });
     }
+
+    dispatch(actionKey, payload) {
+        let self = this;
+
+        if(typeof self.actions[actionKey] !== 'function') {
+            console.error(`Action "${actionKey}" doesn't exist.`);
+            return false;
+        }
+
+        console.groupCollapsed(`ACTION: ${actionKey}`);
+
+        self.status = 'action';
+
+        self.actions[ationKey](self, payload);
+
+        console.groupEnd();
+
+        return true;
+    }
+
+    commit(mutationKey, payload) {
+        let self = this;
+
+        if(typeof self.mutations[mutationKey] !== 'function') {
+            console.log(`MUTATION: "${mutationKey}" doesn't exist.`);
+            return false;
+        }
+
+        self.status = 'mutation';
+
+        let newState = self.mutations[mutationKey](self, payload);
+
+        self.state = Object.assign(self.state, newState);
+
+        return true;
+    }
 }
